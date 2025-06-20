@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Key Management System - MSM Team</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-header">
+      <div class="logo-container">
+        <h1>Key Management System</h1>
+        <h5>MSM Team</h5>
+      </div>
+    </div>
+
+    <!-- Login Info Box -->
+    <div class="login-info">
+      <p><strong>Supervisor Login:</strong> Username: <code>ameerul</code>, Password: <code>ameerul123</code></p>
+      <p><strong>Staff Login:</strong> Username: <code>fazura</code>, Password: <code>fazura123</code></p>
+    </div>
+
+    <div class="login-form">
+      <h2>Login</h2>
+      <div class="input-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <div class="input-group">
+        <label for="role">Role</label>
+        <select id="role" name="role">
+          <option value="supervisor">Supervisor</option>
+          <option value="staff">Staff</option>
+        </select>
+      </div>
+      <button id="login-btn" class="btn btn-primary">Login</button>
+      <div id="error-message" class="error-message"></div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Management System</title>
+    <link rel="stylesheet" href="css/key-management.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <button class="home-btn">Home</button>
+            <div class="system-name">Key Management System</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search keys by ID, house or status...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+    
+    <aside>
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="svdashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="house.html"><i class="fas fa-home"></i> Register House</a></li>
+            <li><a href="guest.html"><i class="fas fa-user"></i> Register Guest</a></li>
+            <li><a href="kms-homepage.html"><i class="fas fa-key"></i> Key Management</a></li>
+            <li><a href="assignment-details.html"><i class="fas fa-tasks"></i> Assignment</a></li>
+            <li><a href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="inspection.html"><i class="fas fa-clipboard-check"></i> Inspection</a></li>
+            <li><a href="report.html"><i class="fas fa-chart-bar"></i> Report</a></li>
+            <li><a href="account-management.html"><i class="fas fa-user-cog"></i> Account Management</a></li>
+        </ul>/
+    </aside>
+    
+    <main>
+        <div class="key-management-container">
+            <div class="page-header">
+                <h1 class="page-title"><i class="fas fa-key"></i> Key Management</h1>
+                <div class="action-buttons">
+                    <button class="action-btn edit-btn">
+                        <i class="fas fa-edit"></i> Edit Key
+                    </button>
+                    <button class="action-btn create-btn">
+                        <i class="fas fa-plus"></i> Create New Key
+                    </button>
+                </div>
+            </div>
+            
+            <table class="key-table">
+                <thead>
+                    <tr>
+                        <th>Key ID</th>
+                        <th>House Address</th>
+                        <th>Key Type</th>
+                        <th>Status</th>
+                        <th>Assigned To</th>
+                        <th>Last Updated</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>KEY-001</td>
+                        <td>123 Main Street, Apartment 4B</td>
+                        <td>Main Door</td>
+                        <td><span class="status-badge status-assigned">Assigned</span></td>
+                        <td>John Smith (Staff)</td>
+                        <td>2023-06-10</td>
+                        <td class="actions">
+                            <button class="table-btn view-btn"><i class="fas fa-eye"></i> View</button>
+                            <button class="table-btn edit-table-btn"><i class="fas fa-edit"></i> Edit</button>
+                            <button class="table-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>KEY-002</td>
+                        <td>456 Oak Avenue</td>
+                        <td>Main Door</td>
+                        <td><span class="status-badge status-available">Available</span></td>
+                        <td>-</td>
+                        <td>2023-06-05</td>
+                        <td class="actions">
+                            <button class="table-btn view-btn"><i class="fas fa-eye"></i> View</button>
+                            <button class="table-btn edit-table-btn"><i class="fas fa-edit"></i> Edit</button>
+                            <button class="table-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>KEY-002</td>
+                        <td>789 Pine Road</td>
+                        <td>Back Door</td>
+                        <td><span class="status-badge status-lost">Lost</span></td>
+                        <td>-</td>
+                        <td>2023-05-28</td>
+                        <td class="actions">
+                            <button class="table-btn view-btn"><i class="fas fa-eye"></i> View</button>
+                            <button class="table-btn edit-table-btn"><i class="fas fa-edit"></i> Edit</button>
+                            <button class="table-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>KEY-004</td>
+                        <td>321 Elm Street</td>
+                        <td>Main Door</td>
+                        <td><span class="status-badge status-assigned">Assigned</span></td>
+                        <td>Sarah Johnson (Guest)</td>
+                        <td>2023-06-12</td>
+                        <td class="actions">
+                            <button class="table-btn view-btn"><i class="fas fa-eye"></i> View</button>
+                            <button class="table-btn edit-table-btn"><i class="fas fa-edit"></i> Edit</button>
+                            <button class="table-btn delete-btn"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        // Functionality for Edit and Create buttons
+        document.querySelector('.edit-btn').addEventListener('click', function() {
+            // In a real application, this would enable edit mode for selected keys
+            alert('Edit mode activated. Please select a key to edit.');
+        });
+        
+        document.querySelector('.create-btn').addEventListener('click', function() {
+            // In a real application, this would open a key creation form
+            alert('Opening new key creation form...');
+        });
+        
+        // Functionality for table action buttons
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const keyId = this.closest('tr').querySelector('td:first-child').textContent;
+                alert(`Viewing details for key: ${keyId}`);
+            });
+        });
+        
+        document.querySelectorAll('.edit-table-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const keyId = this.closest('tr').querySelector('td:first-child').textContent;
+                alert(`Editing key: ${keyId}`);
+            });
+        });
+        
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const keyId = this.closest('tr').querySelector('td:first-child').textContent;
+                if(confirm(`Are you sure you want to delete key ${keyId}?`)) {
+                    alert(`Key ${keyId} will be deleted. In a real app, this would remove it from the database.`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

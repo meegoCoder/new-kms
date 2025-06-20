@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Management System - Account Management</title>
+    <link rel="stylesheet" href="css/account-management.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <button class="home-btn">Home</button>
+            <div class="system-name">Key Management System</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search staff...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+    
+    <aside>
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+        </div>
+        <ul class="sidebar-menu">
+           <li><a href="svdashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="house.html"><i class="fas fa-home"></i> Register House</a></li>
+            <li><a href="guest.html"><i class="fas fa-user"></i> Register Guest</a></li>
+            <li><a href="kms-homepage.html"><i class="fas fa-key"></i> Key Management</a></li>
+            <li><a href="assignment-details.html"><i class="fas fa-tasks"></i> Assignment</a></li>
+            <li><a href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="inspection.html"><i class="fas fa-clipboard-check"></i> Inspection</a></li>
+            <li><a href="report.html"><i class="fas fa-chart-bar"></i> Report</a></li>
+            <li><a href="account-management.html"><i class="fas fa-user-cog"></i> Account Management</a></li>
+        </ul>
+    </aside>
+    
+    <main>
+        <div class="account-container">
+            <div class="page-header">
+                <h1 class="page-title"><i class="fas fa-user-cog"></i> Staff Accounts</h1>
+                <div class="action-buttons">
+                    <button class="action-btn new-staff-btn" id="newStaffBtn">
+                        <i class="fas fa-plus"></i> New Staff
+                    </button>
+                </div>
+            </div>
+            
+            <table class="staff-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Staff Name</th>
+                        <th>Staff ID</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Staff" class="staff-avatar"></td>
+                        <td>Michael Johnson</td>
+                        <td>STF-001</td>
+                        <td>michael.johnson@example.com</td>
+                        <td>(555) 123-4567</td>
+                        <td><span class="role-badge role-supervisor">Supervisor</span></td>
+                        <td class="staff-actions">
+                            <button class="table-btn edit-btn" onclick="editStaff('STF-001')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteStaff('STF-001')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Staff" class="staff-avatar"></td>
+                        <td>Sarah Williams</td>
+                        <td>STF-002</td>
+                        <td>sarah.williams@example.com</td>
+                        <td>(555) 234-5678</td>
+                        <td><span class="role-badge role-staff">Staff</span></td>
+                        <td class="staff-actions">
+                            <button class="table-btn edit-btn" onclick="editStaff('STF-002')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteStaff('STF-002')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Staff" class="staff-avatar"></td>
+                        <td>David Wilson</td>
+                        <td>STF-003</td>
+                        <td>david.wilson@example.com</td>
+                        <td>(555) 345-6789</td>
+                        <td><span class="role-badge role-admin">Admin</span></td>
+                        <td class="staff-actions">
+                            <button class="table-btn edit-btn" onclick="editStaff('STF-003')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteStaff('STF-003')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Staff" class="staff-avatar"></td>
+                        <td>Emily Davis</td>
+                        <td>STF-004</td>
+                        <td>emily.davis@example.com</td>
+                        <td>(555) 456-7890</td>
+                        <td><span class="role-badge role-staff">Staff</span></td>
+                        <td class="staff-actions">
+                            <button class="table-btn edit-btn" onclick="editStaff('STF-004')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteStaff('STF-004')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Staff Account Modal -->
+    <div class="modal" id="staffModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle"><i class="fas fa-user-plus"></i> New Staff Account</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="staffAccountForm">
+                    <input type="hidden" id="staffId">
+                    
+                    <div class="avatar-upload">
+                        <img id="avatarPreview" src="https://via.placeholder.com/80" alt="Avatar Preview" class="avatar-preview">
+                        <div>
+                            <button type="button" class="upload-btn">
+                                <i class="fas fa-camera"></i> Upload Photo
+                            </button>
+                            <p style="font-size: 12px; color: #666; margin-top: 5px;">JPG, PNG max 2MB</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="staffName">Full Name</label>
+                            <input type="text" id="staffName" placeholder="Enter staff full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="staffIdInput">Staff ID</label>
+                            <input type="text" id="staffIdInput" placeholder="Auto-generated" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" placeholder="Enter email address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="Enter phone number" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="role">Role</label>
+                            <select id="role" required>
+                                <option value="">Select Role</option>
+                                <option value="staff">Staff</option>
+                                <option value="supervisor">Supervisor</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="joinDate">Join Date</label>
+                            <input type="date" id="joinDate" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+                        <input type="text" id="notes" placeholder="Any additional information">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="action-btn cancel-btn" onclick="closeModal()">Cancel</button>
+                <button type="button" class="action-btn save-btn" onclick="saveStaff()">Save Account</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Current staff being edited
+        let currentStaff = null;
+        
+        // Open modal for new staff
+        document.getElementById('newStaffBtn').addEventListener('click', function() {
+            currentStaff = null;
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-user-plus"></i> New Staff Account';
+            document.getElementById('staffAccountForm').reset();
+            document.getElementById('staffId').value = '';
+            document.getElementById('staffIdInput').value = 'STF-' + Math.floor(1000 + Math.random() * 9000);
+            document.getElementById('avatarPreview').src = 'https://via.placeholder.com/80';
+            document.getElementById('joinDate').valueAsDate = new Date();
+            openModal('staffModal');
+        });
+        
+        // Edit staff function
+        function editStaff(staffId) {
+            // In a real app, this would fetch staff data from server
+            const staffData = {
+                'STF-001': {
+                    name: 'Michael Johnson',
+                    email: 'michael.johnson@example.com',
+                    phone: '(555) 123-4567',
+                    role: 'supervisor',
+                    joinDate: '2022-01-15',
+                    notes: 'Head supervisor',
+                    avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
+                },
+                'STF-002': {
+                    name: 'Sarah Williams',
+                    email: 'sarah.williams@example.com',
+                    phone: '(555) 234-5678',
+                    role: 'staff',
+                    joinDate: '2022-03-22',
+                    notes: 'Front desk',
+                    avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+                },
+                'STF-003': {
+                    name: 'David Wilson',
+                    email: 'david.wilson@example.com',
+                    phone: '(555) 345-6789',
+                    role: 'admin',
+                    joinDate: '2021-11-05',
+                    notes: 'System administrator',
+                    avatar: 'https://randomuser.me/api/portraits/men/67.jpg'
+                },
+                'STF-004': {
+                    name: 'Emily Davis',
+                    email: 'emily.davis@example.com',
+                    phone: '(555) 456-7890',
+                    role: 'staff',
+                    joinDate: '2022-05-18',
+                    notes: 'Maintenance coordinator',
+                    avatar: 'https://randomuser.me/api/portraits/women/28.jpg'
+                }
+            };
+            
+            currentStaff = staffId;
+            const staff = staffData[staffId];
+            
+            document.getElementById('modalTitle').innerHTML = `<i class="fas fa-user-edit"></i> Edit Staff ${staffId}`;
+            document.getElementById('staffId').value = staffId;
+            document.getElementById('staffIdInput').value = staffId;
+            document.getElementById('staffName').value = staff.name;
+            document.getElementById('email').value = staff.email;
+            document.getElementById('phone').value = staff.phone;
+            document.getElementById('role').value = staff.role;
+            document.getElementById('joinDate').value = staff.joinDate;
+            document.getElementById('notes').value = staff.notes;
+            document.getElementById('avatarPreview').src = staff.avatar;
+            
+            openModal('staffModal');
+        }
+        
+        // Delete staff function
+        function deleteStaff(staffId) {
+            if (confirm(`Are you sure you want to delete staff ${staffId}? This action cannot be undone.`)) {
+                // In a real app, this would delete from server
+                alert(`Staff ${staffId} has been deleted.`);
+                // Refresh the staff list
+            }
+        }
+        
+        // Save staff function
+        function saveStaff() {
+            const form = document.getElementById('staffAccountForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
+            const staffId = document.getElementById('staffId').value;
+            const isNew = !staffId;
+            
+            // In a real app, this would save to server
+            if (isNew) {
+                alert('New staff account created successfully!');
+            } else {
+                alert(`Staff ${staffId} updated successfully!`);
+            }
+            
+            closeModal();
+            // Refresh the staff list
+        }
+        
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('staffModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.className === 'modal') {
+                closeModal();
+            }
+        });
+        
+        // Avatar upload simulation
+        document.querySelector('.upload-btn').addEventListener('click', function() {
+            // In a real app, this would open a file dialog
+            alert('In a real application, this would open a file dialog to select an image.');
+            // For demo purposes, we'll just change the avatar
+            const randomGender = Math.random() > 0.5 ? 'men' : 'women';
+            const randomId = Math.floor(Math.random() * 100);
+            document.getElementById('avatarPreview').src = `https://randomuser.me/api/portraits/${randomGender}/${randomId}.jpg`;
+        });
+    </script>
+</body>
+</html>

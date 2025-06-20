@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Management System - Task Assignment</title>
+    <link rel="stylesheet" href="css/assignment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <button class="home-btn">Home</button>
+            <div class="system-name">Key Management System</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search tasks...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+    
+    <aside>
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="svdashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="house.html"><i class="fas fa-home"></i> Register House</a></li>
+            <li><a href="guest.html"><i class="fas fa-user"></i> Register Guest</a></li>
+            <li><a href="kms-homepage.html"><i class="fas fa-key"></i> Key Management</a></li>
+            <li><a href="assignment-details.html"><i class="fas fa-tasks"></i> Assignment</a></li>
+            <li><a href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="inspection.html"><i class="fas fa-clipboard-check"></i> Inspection</a></li>
+            <li><a href="report.html"><i class="fas fa-chart-bar"></i> Report</a></li>
+            <li><a href="account-management.html"><i class="fas fa-user-cog"></i> Account Management</a></li>
+        </ul>
+    </aside>
+    
+    <main>
+        <div class="task-container">
+            <div class="page-header">
+                <h1 class="page-title"><i class="fas fa-tasks"></i> Task Assignment</h1>
+                <div class="action-buttons">
+                    <button class="action-btn new-task-btn" id="newTaskBtn">
+                        <i class="fas fa-plus"></i> New Assignment
+                    </button>
+                </div>
+            </div>
+            
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>Task ID</th>
+                        <th>House</th>
+                        <th>Task Type</th>
+                        <th>Assigned To</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TASK-001</td>
+                        <td>123 Main Street</td>
+                        <td><span class="task-type type-inspection">Inspection</span></td>
+                        <td>John Smith</td>
+                        <td>2023-06-20</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td class="actions">
+                            <button class="table-btn edit-btn" onclick="editTask('TASK-001')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteTask('TASK-001')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>TASK-002</td>
+                        <td>456 Oak Avenue</td>
+                        <td><span class="task-type type-maintenance">Maintenance</span></td>
+                        <td>Sarah Johnson</td>
+                        <td>2023-06-18</td>
+                        <td><span class="status-badge status-in-progress">In Progress</span></td>
+                        <td class="actions">
+                            <button class="table-btn edit-btn" onclick="editTask('TASK-002')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteTask('TASK-002')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>TASK-003</td>
+                        <td>789 Pine Road</td>
+                        <td><span class="task-type type-inspection">Inspection</span></td>
+                        <td>Michael Brown</td>
+                        <td>2023-06-15</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                        <td class="actions">
+                            <button class="table-btn edit-btn" onclick="editTask('TASK-003')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteTask('TASK-003')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>TASK-004</td>
+                        <td>321 Elm Street</td>
+                        <td><span class="task-type type-maintenance">Maintenance</span></td>
+                        <td>David Wilson</td>
+                        <td>2023-06-12</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                        <td class="actions">
+                            <button class="table-btn edit-btn" onclick="editTask('TASK-004')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteTask('TASK-004')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Task Assignment Modal -->
+    <div class="modal" id="taskModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle"><i class="fas fa-plus"></i> New Task Assignment</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="taskAssignmentForm">
+                    <input type="hidden" id="taskId">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="taskType">Task Type</label>
+                            <select id="taskType" required>
+                                <option value="">Select Task Type</option>
+                                <option value="inspection">Inspection</option>
+                                <option value="maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="house">House</label>
+                            <select id="house" required>
+                                <option value="">Select House</option>
+                                <option value="H001">123 Main Street</option>
+                                <option value="H002">456 Oak Avenue</option>
+                                <option value="H003">789 Pine Road</option>
+                                <option value="H004">321 Elm Street</option>
+                                <option value="H005">654 Maple Drive</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="assignedTo">Assign To</label>
+                            <select id="assignedTo" required>
+                                <option value="">Select Staff</option>
+                                <option value="S001">John Smith</option>
+                                <option value="S002">Sarah Johnson</option>
+                                <option value="S003">Michael Brown</option>
+                                <option value="S004">David Wilson</option>
+                                <option value="S005">Emily Davis</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dueDate">Due Date</label>
+                            <input type="date" id="dueDate" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="priority">Priority</label>
+                            <select id="priority" required>
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="status" required>
+                                <option value="pending">Pending</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taskDescription">Task Description</label>
+                        <textarea id="taskDescription" placeholder="Enter task details and instructions"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="action-btn cancel-btn" onclick="closeModal()">Cancel</button>
+                <button type="button" class="action-btn save-btn" onclick="saveTask()">Save Assignment</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Current task being edited
+        let currentTask = null;
+        
+        // Open modal for new task
+        document.getElementById('newTaskBtn').addEventListener('click', function() {
+            currentTask = null;
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus"></i> New Task Assignment';
+            document.getElementById('taskAssignmentForm').reset();
+            document.getElementById('taskId').value = '';
+            document.getElementById('status').value = 'pending';
+            openModal('taskModal');
+        });
+        
+        // Edit task function
+        function editTask(taskId) {
+            // In a real app, this would fetch task data from server
+            const taskData = {
+                'TASK-001': {
+                    type: 'inspection',
+                    house: 'H001',
+                    assignedTo: 'S001',
+                    dueDate: '2023-06-20',
+                    priority: 'medium',
+                    status: 'pending',
+                    description: 'Routine quarterly inspection of all systems'
+                },
+                'TASK-002': {
+                    type: 'maintenance',
+                    house: 'H002',
+                    assignedTo: 'S002',
+                    dueDate: '2023-06-18',
+                    priority: 'high',
+                    status: 'in-progress',
+                    description: 'Fix leaky faucet in kitchen'
+                },
+                'TASK-003': {
+                    type: 'inspection',
+                    house: 'H003',
+                    assignedTo: 'S003',
+                    dueDate: '2023-06-15',
+                    priority: 'medium',
+                    status: 'completed',
+                    description: 'Pre-guest arrival inspection'
+                },
+                'TASK-004': {
+                    type: 'maintenance',
+                    house: 'H004',
+                    assignedTo: 'S004',
+                    dueDate: '2023-06-12',
+                    priority: 'low',
+                    status: 'completed',
+                    description: 'Replace light bulbs in hallway'
+                }
+            };
+            
+            currentTask = taskId;
+            const task = taskData[taskId];
+            
+            document.getElementById('modalTitle').innerHTML = `<i class="fas fa-edit"></i> Edit Task ${taskId}`;
+            document.getElementById('taskId').value = taskId;
+            document.getElementById('taskType').value = task.type;
+            document.getElementById('house').value = task.house;
+            document.getElementById('assignedTo').value = task.assignedTo;
+            document.getElementById('dueDate').value = task.dueDate;
+            document.getElementById('priority').value = task.priority;
+            document.getElementById('status').value = task.status;
+            document.getElementById('taskDescription').value = task.description;
+            
+            openModal('taskModal');
+        }
+        
+        // Delete task function
+        function deleteTask(taskId) {
+            if (confirm(`Are you sure you want to delete task ${taskId}? This action cannot be undone.`)) {
+                // In a real app, this would delete from server
+                alert(`Task ${taskId} has been deleted.`);
+                // Refresh the task list
+            }
+        }
+        
+        // Save task function
+        function saveTask() {
+            const form = document.getElementById('taskAssignmentForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
+            const taskId = document.getElementById('taskId').value;
+            const isNew = !taskId;
+            
+            // In a real app, this would save to server
+            if (isNew) {
+                alert('New task assignment created successfully!');
+            } else {
+                alert(`Task ${taskId} updated successfully!`);
+            }
+            
+            closeModal();
+            // Refresh the task list
+        }
+        
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('taskModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.className === 'modal') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

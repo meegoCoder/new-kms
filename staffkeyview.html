@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Management System - Key View</title>
+    <link rel="stylesheet" href="css/staffkeyview.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <button class="home-btn">Home</button>
+            <div class="system-name">Key Management System</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search keys...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+    
+    <aside>
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="staffdashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="staffkeyview.html"><i class="fas fa-key"></i> Key View</a></li>
+            <li><a href="staff-assignment.html"><i class="fas fa-tasks"></i> Assignments</a></li>
+            <li><a href="#"><i class="fas fa-user-cog"></i> Account</a></li>
+        </ul>
+    </aside>
+    
+    <main>
+        <div class="keyview-container">
+            <div class="page-header">
+                <h1 class="page-title"><i class="fas fa-key"></i> Available Keys</h1>
+            </div>
+            
+            <table class="key-table">
+                <thead>
+                    <tr>
+                        <th>Key ID</th>
+                        <th>House Address</th>
+                        <th>Key Type</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>KEY-001</td>
+                        <td>123 Main Street, Apt 4B</td>
+                        <td>Main Door</td>
+                        <td><span class="key-status status-available">Available</span></td>
+                    </tr>
+                    <tr>
+                        <td>KEY-002</td>
+                        <td>456 Oak Avenue</td>
+                        <td>Back Door</td>
+                        <td><span class="key-status status-available">Available</span></td>
+                    </tr>
+                    <tr>
+                        <td>KEY-003</td>
+                        <td>789 Pine Road</td>
+                        <td>Main Door</td>
+                        <td><span class="key-status status-assigned">Assigned to You</span></td>
+                    </tr>
+                    <tr>
+                        <td>KEY-004</td>
+                        <td>321 Elm Street</td>
+                        <td>Garage</td>
+                        <td><span class="key-status status-available">Available</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        // Simple search functionality (would connect to backend in real app)
+        document.querySelector('.search-bar button').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-bar input').value.toLowerCase();
+            const rows = document.querySelectorAll('.key-table tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Management System - Maintenance</title>
+    <link rel="stylesheet" href="css/maintenance.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <button class="home-btn">Home</button>
+            <div class="system-name">Key Management System</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search maintenance tasks...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+    
+    <aside>
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="svdashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="house.html"><i class="fas fa-home"></i> Register House</a></li>
+            <li><a href="guest.html"><i class="fas fa-user"></i> Register Guest</a></li>
+            <li><a href="kms-homepage.html"><i class="fas fa-key"></i> Key Management</a></li>
+            <li><a href="assignment-details.html"><i class="fas fa-tasks"></i> Assignment</a></li>
+            <li><a href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="inspection.html"><i class="fas fa-clipboard-check"></i> Inspection</a></li>
+            <li><a href="report.html"><i class="fas fa-chart-bar"></i> Report</a></li>
+            <li><a href="account-management.html"><i class="fas fa-user-cog"></i> Account Management</a></li>
+        </ul>
+    </aside>
+    
+    <main>
+        <div class="maintenance-container">
+            <div class="page-header">
+                <h1 class="page-title"><i class="fas fa-tools"></i> Maintenance Assignments</h1>
+                <div class="action-buttons">
+                    <button class="action-btn new-maintenance-btn" id="newMaintenanceBtn">
+                        <i class="fas fa-plus"></i> New Assignment
+                    </button>
+                </div>
+            </div>
+            
+            <table class="maintenance-table">
+                <thead>
+                    <tr>
+                        <th>Task ID</th>
+                        <th>House</th>
+                        <th>Assigned To</th>
+                        <th>Issue Type</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>MTN-001</td>
+                        <td>123 Main Street</td>
+                        <td>John Smith</td>
+                        <td>Plumbing</td>
+                        <td>2023-06-20</td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td class="actions">
+                            <button class="table-btn edit-btn" onclick="editMaintenance('MTN-001')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteMaintenance('MTN-001')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>MTN-002</td>
+                        <td>456 Oak Avenue</td>
+                        <td>Sarah Johnson</td>
+                        <td>Electrical</td>
+                        <td>2023-06-18</td>
+                        <td><span class="status-badge status-in-progress">In Progress</span></td>
+                        <td class="actions">
+                            <button class="table-btn edit-btn" onclick="editMaintenance('MTN-002')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteMaintenance('MTN-002')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>MTN-003</td>
+                        <td>789 Pine Road</td>
+                        <td>Michael Brown</td>
+                        <td>HVAC</td>
+                        <td>2023-06-15</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                        <td class="actions">
+                            <button class="table-btn edit-btn" onclick="editMaintenance('MTN-003')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteMaintenance('MTN-003')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>MTN-004</td>
+                        <td>321 Elm Street</td>
+                        <td>David Wilson</td>
+                        <td>Structural</td>
+                        <td>2023-06-12</td>
+                        <td><span class="status-badge status-completed">Completed</span></td>
+                        <td class="actions">
+                            <button class="table-btn edit-btn" onclick="editMaintenance('MTN-004')">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="table-btn delete-btn" onclick="deleteMaintenance('MTN-004')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Maintenance Assignment Modal -->
+    <div class="modal" id="maintenanceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle"><i class="fas fa-plus"></i> New Maintenance Assignment</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="maintenanceAssignmentForm">
+                    <input type="hidden" id="taskId">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="house">House</label>
+                            <select id="house" required>
+                                <option value="">Select House</option>
+                                <option value="H001">123 Main Street</option>
+                                <option value="H002">456 Oak Avenue</option>
+                                <option value="H003">789 Pine Road</option>
+                                <option value="H004">321 Elm Street</option>
+                                <option value="H005">654 Maple Drive</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="assignedTo">Assign To</label>
+                            <select id="assignedTo" required>
+                                <option value="">Select Staff</option>
+                                <option value="S001">John Smith (Plumber)</option>
+                                <option value="S002">Sarah Johnson (Electrician)</option>
+                                <option value="S003">Michael Brown (HVAC)</option>
+                                <option value="S004">David Wilson (General Maintenance)</option>
+                                <option value="S005">Emily Davis (Carpenter)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="issueType">Issue Type</label>
+                            <select id="issueType" required>
+                                <option value="">Select Issue Type</option>
+                                <option value="plumbing">Plumbing</option>
+                                <option value="electrical">Electrical</option>
+                                <option value="hvac">HVAC</option>
+                                <option value="structural">Structural</option>
+                                <option value="appliance">Appliance</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="priority">Priority</label>
+                            <select id="priority" required>
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                                <option value="emergency">Emergency</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dueDate">Due Date</label>
+                            <input type="date" id="dueDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="status" required>
+                                <option value="pending">Pending</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="issueDescription">Issue Description</label>
+                        <textarea id="issueDescription" placeholder="Describe the maintenance issue in detail" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="action-btn cancel-btn" onclick="closeModal()">Cancel</button>
+                <button type="button" class="action-btn save-btn" onclick="saveMaintenance()">Save Assignment</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Current maintenance task being edited
+        let currentMaintenance = null;
+        
+        // Open modal for new maintenance task
+        document.getElementById('newMaintenanceBtn').addEventListener('click', function() {
+            currentMaintenance = null;
+            document.getElementById('modalTitle').innerHTML = '<i class="fas fa-plus"></i> New Maintenance Assignment';
+            document.getElementById('maintenanceAssignmentForm').reset();
+            document.getElementById('taskId').value = '';
+            document.getElementById('status').value = 'pending';
+            document.getElementById('dueDate').valueAsDate = new Date();
+            openModal('maintenanceModal');
+        });
+        
+        // Edit maintenance function
+        function editMaintenance(taskId) {
+            // In a real app, this would fetch maintenance data from server
+            const maintenanceData = {
+                'MTN-001': {
+                    house: 'H001',
+                    assignedTo: 'S001',
+                    issueType: 'plumbing',
+                    priority: 'medium',
+                    dueDate: '2023-06-20',
+                    status: 'pending',
+                    description: 'Fix leaky faucet in kitchen'
+                },
+                'MTN-002': {
+                    house: 'H002',
+                    assignedTo: 'S002',
+                    issueType: 'electrical',
+                    priority: 'high',
+                    dueDate: '2023-06-18',
+                    status: 'in-progress',
+                    description: 'Replace faulty wiring in living room'
+                },
+                'MTN-003': {
+                    house: 'H003',
+                    assignedTo: 'S003',
+                    issueType: 'hvac',
+                    priority: 'medium',
+                    dueDate: '2023-06-15',
+                    status: 'completed',
+                    description: 'Service AC unit and replace filters'
+                },
+                'MTN-004': {
+                    house: 'H004',
+                    assignedTo: 'S004',
+                    issueType: 'structural',
+                    priority: 'medium',
+                    dueDate: '2023-06-12',
+                    status: 'completed',
+                    description: 'Repair cracked drywall in hallway'
+                }
+            };
+            
+            currentMaintenance = taskId;
+            const task = maintenanceData[taskId];
+            
+            document.getElementById('modalTitle').innerHTML = `<i class="fas fa-edit"></i> Edit Maintenance ${taskId}`;
+            document.getElementById('taskId').value = taskId;
+            document.getElementById('house').value = task.house;
+            document.getElementById('assignedTo').value = task.assignedTo;
+            document.getElementById('issueType').value = task.issueType;
+            document.getElementById('priority').value = task.priority;
+            document.getElementById('dueDate').value = task.dueDate;
+            document.getElementById('status').value = task.status;
+            document.getElementById('issueDescription').value = task.description;
+            
+            openModal('maintenanceModal');
+        }
+        
+        // Delete maintenance function
+        function deleteMaintenance(taskId) {
+            if (confirm(`Are you sure you want to delete maintenance task ${taskId}? This action cannot be undone.`)) {
+                // In a real app, this would delete from server
+                alert(`Maintenance task ${taskId} has been deleted.`);
+                // Refresh the maintenance list
+            }
+        }
+        
+        // Save maintenance function
+        function saveMaintenance() {
+            const form = document.getElementById('maintenanceAssignmentForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
+            const taskId = document.getElementById('taskId').value;
+            const isNew = !taskId;
+            
+            // In a real app, this would save to server
+            if (isNew) {
+                alert('New maintenance assignment created successfully!');
+            } else {
+                alert(`Maintenance task ${taskId} updated successfully!`);
+            }
+            
+            closeModal();
+            // Refresh the maintenance list
+        }
+        
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('maintenanceModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.className === 'modal') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

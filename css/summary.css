@@ -1,0 +1,140 @@
+/* Summary styles */
+.check-dates {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 15px 20px;
+}
+
+.date-section {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.date-header {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.date-action {
+  color: var(--dark-gray);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.date-icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--dark-gray);
+}
+
+/* Booking summary */
+.booking-summary {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.summary-item {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.summary-label {
+  font-size: 0.85rem;
+  color: var(--dark-gray);
+}
+
+.summary-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.summary-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.check-detail {
+  display: flex;
+  align-items: center;
+}
+
+.check-label {
+  flex: 1;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.check-value {
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.duration-detail {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 10px;
+}
+
+.duration-label {
+  flex: 1;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.duration-value {
+  flex: 1;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.view-all-details {
+  align-self: center;
+  color: var(--accent-color);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 15px;
+  transition: var(--transition);
+}
+
+.view-all-details:hover {
+  text-decoration: underline;
+}
+
+/* Responsive summary */
+@media (max-width: 600px) {
+  .check-dates {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .date-section {
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .date-section:last-child {
+    border-bottom: none;
+  }
+}

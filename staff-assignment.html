@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Management System - Assignments</title>
+    <link rel="stylesheet" href="css/staffassignment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <button class="home-btn">Home</button>
+            <div class="system-name">Key Management System</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search assignments...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+    
+    <aside>
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="staffdashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="staffkeyview.html"><i class="fas fa-key"></i> Key View</a></li>
+            <li><a href="staff-assignment.html"><i class="fas fa-tasks"></i> Assignments</a></li>
+            <li><a href="#"><i class="fas fa-user-cog"></i> Account</a></li>
+        </ul>
+    </aside>
+    
+    <main>
+        <div class="assignments-container">
+            <div class="page-header">
+                <h1 class="page-title"><i class="fas fa-tasks"></i> My Assignments</h1>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" onclick="openTab(event, 'current-tab')">Current</div>
+                <div class="tab" onclick="openTab(event, 'completed-tab')">Completed</div>
+            </div>
+            
+            <!-- Current Assignments Tab -->
+            <div id="current-tab" class="tab-content active">
+                <table class="assignments-table">
+                    <thead>
+                        <tr>
+                            <th>Task ID</th>
+                            <th>House</th>
+                            <th>Type</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ASG-001</td>
+                            <td>123 Main Street</td>
+                            <td>Inspection</td>
+                            <td>2023-06-20</td>
+                            <td><span class="status-badge status-pending">Pending</span></td>
+                            <td>
+                                <button class="action-btn start-btn" onclick="viewAssignment('ASG-001')">
+                                    <i class="fas fa-play"></i> Start
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ASG-002</td>
+                            <td>456 Oak Avenue</td>
+                            <td>Maintenance</td>
+                            <td>2023-06-18</td>
+                            <td><span class="status-badge status-in-progress">In Progress</span></td>
+                            <td>
+                                <button class="action-btn complete-btn" onclick="viewAssignment('ASG-002')">
+                                    <i class="fas fa-check"></i> Complete
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Completed Assignments Tab -->
+            <div id="completed-tab" class="tab-content">
+                <table class="assignments-table">
+                    <thead>
+                        <tr>
+                            <th>Task ID</th>
+                            <th>House</th>
+                            <th>Type</th>
+                            <th>Completed Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ASG-003</td>
+                            <td>789 Pine Road</td>
+                            <td>Key Return</td>
+                            <td>2023-06-15</td>
+                            <td><span class="status-badge status-completed">Completed</span></td>
+                            <td>
+                                <button class="action-btn" onclick="viewAssignment('ASG-003')" style="background-color: #f0f0f0;">
+                                    <i class="fas fa-eye"></i> View
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Assignment Details Modal -->
+    <div class="modal" id="assignmentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalAssignmentTitle">Assignment Details</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="assignmentDetails">
+                <!-- Details will be inserted here by JavaScript -->
+            </div>
+            <div class="update-status">
+                <h4>Update Status</h4>
+                <select class="status-select" id="statusUpdate">
+                    <option value="pending">Pending</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <textarea class="notes-input" id="statusNotes" placeholder="Add notes about this assignment..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn" onclick="closeModal()" style="background-color: #f0f0f0;">Cancel</button>
+                <button class="action-btn" onclick="updateAssignment()" style="background-color: rgb(255, 165, 0); color: white;">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab functionality
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            const tabs = document.getElementsByClassName("tab");
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+        
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('assignmentModal').style.display = 'none';
+        }
+        
+        // View assignment details
+        function viewAssignment(assignmentId) {
+            // In a real app, this would fetch assignment data from server
+            const assignmentData = {
+                'ASG-001': {
+                    title: 'House Inspection - 123 Main Street',
+                    house: '123 Main Street, Apartment 4B',
+                    type: 'Inspection',
+                    assignedBy: 'Supervisor Admin',
+                    dueDate: '2023-06-20',
+                    status: 'pending',
+                    description: 'Complete full inspection of the property including plumbing, electrical, and structural components.'
+                },
+                'ASG-002': {
+                    title: 'Maintenance - 456 Oak Avenue',
+                    house: '456 Oak Avenue',
+                    type: 'Maintenance',
+                    assignedBy: 'Supervisor Admin',
+                    dueDate: '2023-06-18',
+                    status: 'in-progress',
+                    description: 'Fix leaky faucet in kitchen and replace bathroom light fixtures.'
+                },
+                'ASG-003': {
+                    title: 'Key Return - 789 Pine Road',
+                    house: '789 Pine Road',
+                    type: 'Key Return',
+                    assignedBy: 'Supervisor Admin',
+                    dueDate: '2023-06-15',
+                    status: 'completed',
+                    description: 'Collect keys from guest and verify property condition.',
+                    completedDate: '2023-06-14',
+                    completedNotes: 'Keys returned in good condition. Property was clean with no issues.'
+                }
+            };
+            
+            const assignment = assignmentData[assignmentId];
+            
+            document.getElementById('modalAssignmentTitle').textContent = assignment.title;
+            
+            let detailsHTML = `
+                <div class="detail-row">
+                    <div class="detail-label">House:</div>
+                    <div class="detail-value">${assignment.house}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Type:</div>
+                    <div class="detail-value">${assignment.type}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Assigned By:</div>
+                    <div class="detail-value">${assignment.assignedBy}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Due Date:</div>
+                    <div class="detail-value">${assignment.dueDate}</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Description:</div>
+                    <div class="detail-value">${assignment.description}</div>
+                </div>
+            `;
+            
+            if (assignment.status === 'completed') {
+                detailsHTML += `
+                    <div class="detail-row">
+                        <div class="detail-label">Completed Date:</div>
+                        <div class="detail-value">${assignment.completedDate}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Completion Notes:</div>
+                        <div class="detail-value">${assignment.completedNotes}</div>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('assignmentDetails').innerHTML = detailsHTML;
+            document.getElementById('statusUpdate').value = assignment.status;
+            document.getElementById('statusNotes').value = assignment.status === 'completed' ? assignment.completedNotes : '';
+            
+            openModal('assignmentModal');
+        }
+        
+        // Update assignment status
+        function updateAssignment() {
+            const newStatus = document.getElementById('statusUpdate').value;
+            const notes = document.getElementById('statusNotes').value;
+            
+            // In a real app, this would send data to server
+            alert(`Assignment status updated to ${newStatus} with notes: ${notes}`);
+            closeModal();
+            // Refresh the assignments list
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.className === 'modal') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

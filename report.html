@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Management System - Reports</title>
+    <link rel="stylesheet" href="css/report.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <button class="home-btn">Home</button>
+            <div class="system-name">Key Management System</div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search reports...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+    
+    <aside>
+        <div class="sidebar-header">
+            <h2>Menu</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="svdashboard.html" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li><a href="house.html"><i class="fas fa-home"></i> Register House</a></li>
+            <li><a href="guest.html"><i class="fas fa-user"></i> Register Guest</a></li>
+            <li><a href="kms-homepage.html"><i class="fas fa-key"></i> Key Management</a></li>
+            <li><a href="assignment-details.html"><i class="fas fa-tasks"></i> Assignment</a></li>
+            <li><a href="maintenance.html"><i class="fas fa-tools"></i> Maintenance</a></li>
+            <li><a href="inspection.html"><i class="fas fa-clipboard-check"></i> Inspection</a></li>
+            <li><a href="report.html"><i class="fas fa-chart-bar"></i> Report</a></li>
+            <li><a href="account-management.html"><i class="fas fa-user-cog"></i> Account Management</a></li>
+        </ul>
+    </aside>
+    
+    <main>
+        <div class="report-container">
+            <div class="page-header">
+                <h1 class="page-title"><i class="fas fa-chart-bar"></i> Key Assignment Reports</h1>
+            </div>
+            
+            <div class="report-controls">
+                <div class="report-type">
+                    <select id="reportType">
+                        <option value="all">All Key Assignments</option>
+                        <option value="current">Current Assignments</option>
+                        <option value="completed">Completed Assignments</option>
+                        <option value="overdue">Overdue Key Returns</option>
+                    </select>
+                </div>
+                
+                <div class="date-range">
+                    <label>From:</label>
+                    <input type="date" id="startDate">
+                    <label>To:</label>
+                    <input type="date" id="endDate">
+                </div>
+                
+                <button class="generate-btn" id="generateReport">
+                    <i class="fas fa-sync-alt"></i> Generate
+                </button>
+                
+                <button class="export-btn">
+                    <i class="fas fa-file-export"></i> Export
+                </button>
+            </div>
+            
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Key ID</th>
+                        <th>House Unit</th>
+                        <th>Guest Name</th>
+                        <th>Check-In Date</th>
+                        <th>Check-Out Date</th>
+                        <th>Staff ID</th>
+                        <th>Staff Name</th>
+                        <th>Staff Role</th>
+                        <th>House Status</th>
+                        <th>Key Returned</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>KEY-001</td>
+                        <td>123 Main St, Apt 4B</td>
+                        <td>John Smith</td>
+                        <td>2023-06-10</td>
+                        <td>2023-06-17</td>
+                        <td>STF-001</td>
+                        <td>Michael Johnson</td>
+                        <td>Front Desk</td>
+                        <td><span class="status-badge status-occupied">Occupied</span></td>
+                        <td class="key-not-returned">No</td>
+                    </tr>
+                    <tr>
+                        <td>KEY-002</td>
+                        <td>456 Oak Ave</td>
+                        <td>Sarah Williams</td>
+                        <td>2023-06-05</td>
+                        <td>2023-06-12</td>
+                        <td>STF-002</td>
+                        <td>Emily Davis</td>
+                        <td>Concierge</td>
+                        <td><span class="status-badge status-vacant">Vacant</span></td>
+                        <td class="key-returned">Yes (2023-06-12)</td>
+                    </tr>
+                    <tr>
+                        <td>KEY-003</td>
+                        <td>789 Pine Rd</td>
+                        <td>Robert Brown</td>
+                        <td>2023-06-15</td>
+                        <td>2023-06-22</td>
+                        <td>STF-003</td>
+                        <td>David Wilson</td>
+                        <td>Manager</td>
+                        <td><span class="status-badge status-occupied">Occupied</span></td>
+                        <td class="key-not-returned">No</td>
+                    </tr>
+                    <tr>
+                        <td>KEY-004</td>
+                        <td>321 Elm St</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>STF-004</td>
+                        <td>Jessica Lee</td>
+                        <td>Maintenance</td>
+                        <td><span class="status-badge status-maintenance">Maintenance</span></td>
+                        <td class="key-returned">Yes (2023-06-08)</td>
+                    </tr>
+                    <tr>
+                        <td>KEY-005</td>
+                        <td>654 Maple Dr</td>
+                        <td>Lisa Taylor</td>
+                        <td>2023-06-01</td>
+                        <td>2023-06-08</td>
+                        <td>STF-001</td>
+                        <td>Michael Johnson</td>
+                        <td>Front Desk</td>
+                        <td><span class="status-badge status-vacant">Vacant</span></td>
+                        <td class="key-returned">Yes (2023-06-08)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="report-summary">
+                <h3 class="summary-title"><i class="fas fa-chart-pie"></i> Report Summary</h3>
+                <div class="summary-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Total Assignments</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">Keys Returned</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Keys Outstanding</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">2</div>
+                        <div class="stat-label">Overdue Returns</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Set default dates
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date();
+            const oneMonthAgo = new Date();
+            oneMonthAgo.setMonth(today.getMonth() - 1);
+            
+            document.getElementById('startDate').valueAsDate = oneMonthAgo;
+            document.getElementById('endDate').valueAsDate = today;
+            
+            // Generate report on page load
+            generateReport();
+        });
+        
+        // Generate report function
+        document.getElementById('generateReport').addEventListener('click', generateReport);
+        
+        function generateReport() {
+            const reportType = document.getElementById('reportType').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            // In a real application, this would fetch data from the server
+            // based on the selected filters
+            console.log(`Generating ${reportType} report from ${startDate} to ${endDate}`);
+            
+            // Here we would update the table with the filtered data
+            // For this demo, we're just showing all data
+        }
+        
+        // Export function
+        document.querySelector('.export-btn').addEventListener('click', function() {
+            // In a real application, this would export the current report
+            // to CSV, PDF, or Excel format
+            alert('Exporting current report...');
+        });
+    </script>
+</body>
+</html>
