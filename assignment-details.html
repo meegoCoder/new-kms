@@ -55,6 +55,7 @@
                         <th>Task Type</th>
                         <th>Assigned To</th>
                         <th>Due Date</th>
+                        <th>Priority</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -66,8 +67,12 @@
                         <td><span class="task-type type-inspection">Inspection</span></td>
                         <td>John Smith</td>
                         <td>2023-06-20</td>
+                        <td><span class="priority-badge priority-medium">Medium</span></td>
                         <td><span class="status-badge status-pending">Pending</span></td>
                         <td class="actions">
+                            <button class="table-btn checklist-btn" onclick="showChecklist('TASK-001')">
+                                <i class="fas fa-clipboard-list"></i> Checklist
+                            </button>
                             <button class="table-btn edit-btn" onclick="editTask('TASK-001')">
                                 <i class="fas fa-edit"></i> Edit
                             </button>
@@ -82,8 +87,12 @@
                         <td><span class="task-type type-maintenance">Maintenance</span></td>
                         <td>Sarah Johnson</td>
                         <td>2023-06-18</td>
+                        <td><span class="priority-badge priority-high">High</span></td>
                         <td><span class="status-badge status-in-progress">In Progress</span></td>
                         <td class="actions">
+                            <button class="table-btn checklist-btn" onclick="showChecklist('TASK-002')">
+                                <i class="fas fa-clipboard-list"></i> Checklist
+                            </button>
                             <button class="table-btn edit-btn" onclick="editTask('TASK-002')">
                                 <i class="fas fa-edit"></i> Edit
                             </button>
@@ -98,8 +107,12 @@
                         <td><span class="task-type type-inspection">Inspection</span></td>
                         <td>Michael Brown</td>
                         <td>2023-06-15</td>
+                        <td><span class="priority-badge priority-medium">Medium</span></td>
                         <td><span class="status-badge status-completed">Completed</span></td>
                         <td class="actions">
+                            <button class="table-btn checklist-btn" onclick="showChecklist('TASK-003')">
+                                <i class="fas fa-clipboard-list"></i> Checklist
+                            </button>
                             <button class="table-btn edit-btn" onclick="editTask('TASK-003')">
                                 <i class="fas fa-edit"></i> Edit
                             </button>
@@ -114,8 +127,12 @@
                         <td><span class="task-type type-maintenance">Maintenance</span></td>
                         <td>David Wilson</td>
                         <td>2023-06-12</td>
+                        <td><span class="priority-badge priority-low">Low</span></td>
                         <td><span class="status-badge status-completed">Completed</span></td>
                         <td class="actions">
+                            <button class="table-btn checklist-btn" onclick="showChecklist('TASK-004')">
+                                <i class="fas fa-clipboard-list"></i> Checklist
+                            </button>
                             <button class="table-btn edit-btn" onclick="editTask('TASK-004')">
                                 <i class="fas fa-edit"></i> Edit
                             </button>
@@ -207,6 +224,141 @@
             <div class="modal-footer">
                 <button type="button" class="action-btn cancel-btn" onclick="closeModal()">Cancel</button>
                 <button type="button" class="action-btn save-btn" onclick="saveTask()">Save Assignment</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checklist Modal -->
+    <div class="modal" id="checklistModal">
+        <div class="modal-content checklist-modal">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fas fa-clipboard-list"></i> House Inspection Checklist</h3>
+                <button class="close-btn" onclick="closeChecklistModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="checklist-header">
+                    <h4 id="checklistHouse">House: 123 Main Street</h4>
+                    <div class="checklist-status">
+                        <span class="status-badge status-pending">Inspection Pending</span>
+                    </div>
+                </div>
+                
+                <div class="checklist-section">
+                    <h5><i class="fas fa-door-open"></i> Exterior Inspection</h5>
+                    <ul class="checklist-items">
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Check all doors and windows for proper operation</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Inspect exterior walls for damage or cracks</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Check roof condition and gutters</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Verify outdoor lighting functionality</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="checklist-section">
+                    <h5><i class="fas fa-home"></i> Interior Inspection</h5>
+                    <ul class="checklist-items">
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Test all light switches and outlets</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Check plumbing for leaks (faucets, toilets, pipes)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Inspect HVAC system and filters</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Test smoke and carbon monoxide detectors</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="checklist-section">
+                    <h5><i class="fas fa-utensils"></i> Kitchen Inspection</h5>
+                    <ul class="checklist-items">
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Test all appliances (stove, oven, microwave, refrigerator)</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Check for proper cabinet and drawer operation</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Inspect sink and garbage disposal</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="checklist-section">
+                    <h5><i class="fas fa-bath"></i> Bathroom Inspection</h5>
+                    <ul class="checklist-items">
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Test all faucets and shower functionality</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Check toilet operation and for leaks</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Inspect ventilation and exhaust fans</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="form-group checklist-notes">
+                    <label for="inspectionNotes">Additional Notes</label>
+                    <textarea id="inspectionNotes" placeholder="Enter any additional findings or comments"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="action-btn cancel-btn" onclick="closeChecklistModal()">Cancel</button>
+                <button type="button" class="action-btn save-btn" onclick="submitChecklist()">Submit Inspection</button>
             </div>
         </div>
     </div>
@@ -314,6 +466,83 @@
             // Refresh the task list
         }
         
+        // Show checklist function
+        function showChecklist(taskId) {
+            // In a real app, this would fetch task data from server
+            const taskData = {
+                'TASK-001': {
+                    type: 'inspection',
+                    house: '123 Main Street',
+                    assignedTo: 'John Smith',
+                    status: 'pending',
+                },
+                'TASK-002': {
+                    type: 'maintenance',
+                    house: '456 Oak Avenue',
+                    assignedTo: 'Sarah Johnson',
+                    status: 'in-progress',
+                },
+                'TASK-003': {
+                    type: 'inspection',
+                    house: '789 Pine Road',
+                    assignedTo: 'Michael Brown',
+                    status: 'completed',
+                },
+                'TASK-004': {
+                    type: 'maintenance',
+                    house: '321 Elm Street',
+                    assignedTo: 'David Wilson',
+                    status: 'completed',
+                }
+            };
+            
+            const task = taskData[taskId];
+            
+            if (task.type === 'inspection') {
+                // For inspection tasks, show the checklist modal
+                document.getElementById('checklistHouse').textContent = `House: ${task.house}`;
+                openModal('checklistModal');
+            } else if (task.type === 'maintenance') {
+                // For maintenance tasks, show a simple task order modal
+                showTaskOrder(taskId);
+            }
+        }
+        
+        // Show task order function (for maintenance tasks)
+        function showTaskOrder(taskId) {
+            // Simple task order modal content for maintenance
+            const taskData = {
+                'TASK-002': 'Fix leaky faucet in kitchen.',
+                'TASK-004': 'Replace light bulbs in hallway.'
+            };
+            
+            const taskDescription = taskData[taskId] || 'No description available.';
+            
+            // Display task order modal with the task description
+            const taskOrderModal = `
+                <div class="modal-content task-order-modal">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Task Order - ${taskId}</h3>
+                        <button class="close-btn" onclick="closeModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Task Description:</h4>
+                        <p>${taskDescription}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="action-btn cancel-btn" onclick="closeModal()">Close</button>
+                    </div>
+                </div>
+            `;
+            
+            // Insert the modal content and open it
+            const modalContainer = document.createElement('div');
+            modalContainer.className = 'modal task-order-modal-container';
+            modalContainer.innerHTML = taskOrderModal;
+            document.body.appendChild(modalContainer);
+            openModal('task-order-modal-container');
+        }
+        
         // Modal functions
         function openModal(modalId) {
             document.getElementById(modalId).style.display = 'flex';
@@ -323,390 +552,59 @@
             document.getElementById('taskModal').style.display = 'none';
         }
         
+        function closeChecklistModal() {
+            document.getElementById('checklistModal').style.display = 'none';
+        }
+        
         // Close modal when clicking outside
         window.addEventListener('click', function(event) {
             if (event.target.className === 'modal') {
                 closeModal();
+                closeChecklistModal();
             }
         });
     </script>
+
+    <style>
+        /* Additional CSS for Task Order Modal */
+        /* Task Order Modal Styles */
+        .task-order-modal-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .task-order-modal {
+            background-color: white;
+            border-radius: 8px;
+            width: 600px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .task-order-modal h3 {
+            color: rgb(255, 165, 0);
+            font-size: 20px;
+        }
+
+        .task-order-modal .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .task-order-modal .cancel-btn {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+    </style>
 </body>
-<style>
-    /* assignment.css */
-
-/* General Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    grid-template-rows: 80px 1fr;
-    height: 100vh;
-    background-color: #f5f5f5;
-}
-
-/* Header */
-header {
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-    background-color: rgb(90, 90, 90);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    padding: 0 30px;
-    justify-content: space-between;
-}
-
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.home-btn {
-    background-color: rgb(255, 165, 0);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.home-btn:hover {
-    background-color: rgba(255, 165, 0, 0.8);
-}
-
-.system-name {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-}
-
-.search-bar {
-    display: flex;
-    align-items: center;
-}
-
-.search-bar input {
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 300px;
-    outline: none;
-}
-
-.search-bar button {
-    background-color: rgb(255, 165, 0);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 0 5px 5px 0;
-    margin-left: -5px;
-    cursor: pointer;
-}
-
-/* Sidebar */
-aside {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-    background-color: rgb(90, 90, 90);
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    padding: 20px 0;
-}
-
-.sidebar-header {
-    padding: 0 20px 20px;
-    border-bottom: 1px solid rgb(120, 120, 120);
-    margin-bottom: 20px;
-}
-
-.sidebar-header h2 {
-    color: white;
-    font-size: 20px;
-}
-
-.sidebar-menu {
-    list-style: none;
-}
-
-.sidebar-menu li {
-    margin-bottom: 5px;
-}
-
-.sidebar-menu a {
-    display: block;
-    padding: 12px 20px;
-    color: white;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-.sidebar-menu a i {
-    margin-right: 10px;
-    color: rgb(255, 165, 0);
-}
-
-.sidebar-menu a:hover, .sidebar-menu a.active {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: rgb(255, 165, 0);
-    border-left: 4px solid rgb(255, 165, 0);
-}
-
-/* Main */
-main {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-    padding: 30px;
-    overflow-y: auto;
-}
-
-/* Task Assignment */
-.task-container {
-    background-color: white;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
-.page-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.page-title {
-    color: rgb(255, 165, 0);
-    font-size: 24px;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 15px;
-}
-
-.action-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s;
-}
-
-.new-task-btn {
-    background-color: rgb(255, 165, 0);
-    color: white;
-}
-
-.new-task-btn:hover {
-    background-color: rgba(255, 165, 0, 0.8);
-}
-
-.task-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.task-table th, .task-table td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.task-table th {
-    background-color: rgb(90, 90, 90);
-    color: white;
-    font-weight: 600;
-}
-
-.task-table tr:hover {
-    background-color: #f9f9f9;
-}
-
-.task-table .actions {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-}
-
-.table-btn {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 12px;
-}
-
-.edit-btn {
-    background-color: #fff7e6;
-    color: #fa8c16;
-}
-
-.delete-btn {
-    background-color: #fff1f0;
-    color: #f5222d;
-}
-
-.status-badge {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.status-pending {
-    background-color: #fff7e6;
-    color: #fa8c16;
-}
-
-.status-in-progress {
-    background-color: #e6f7ff;
-    color: #1890ff;
-}
-
-.status-completed {
-    background-color: #e6f7ee;
-    color: #00a854;
-}
-
-.task-type {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.type-inspection {
-    background-color: #f6ffed;
-    color: #52c41a;
-    border: 1px solid #b7eb8f;
-}
-
-.type-maintenance {
-    background-color: #fff0f6;
-    color: #eb2f96;
-    border: 1px solid #ffadd2;
-}
-
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: white;
-    border-radius: 8px;
-    width: 600px;
-    max-width: 90%;
-    padding: 25px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
-}
-
-.modal-title {
-    color: rgb(255, 165, 0);
-    font-size: 20px;
-}
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #999;
-}
-
-.modal-body {
-    max-height: 70vh;
-    overflow-y: auto;
-    padding: 10px 0;
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
-}
-
-.form-row {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 15px;
-}
-
-.form-group {
-    flex: 1;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #444;
-}
-
-.form-group select,
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 10px 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.form-group textarea {
-    min-height: 100px;
-}
-
-.form-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.cancel-btn {
-    background-color: #f0f0f0;
-    color: #333;
-}
-
-.save-btn {
-    background-color: rgb(255, 165, 0);
-    color: white;
-}
-
-</style>
 </html>
